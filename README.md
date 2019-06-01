@@ -1,5 +1,7 @@
-# Fusion.js application
+# Fusion.js with Twitch
 
-Welcome to your Fusion.js application. Get started by running the application with `yarn dev` in a terminal.
+View multiple Twitch chats in a single page.
+
+Develop with `yarn dev`.
 
 Visit our documentation at: https://fusionjs.com
