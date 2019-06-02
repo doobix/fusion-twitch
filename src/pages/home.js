@@ -42,7 +42,7 @@ type State = {
 
 class Home extends React.Component<{}, State> {
   state = {
-    channels: ['doobix'],
+    channels: [],
     channelInput: '',
   };
 
@@ -75,9 +75,16 @@ class Home extends React.Component<{}, State> {
           </Center>
         </Nav>
         <Chats>
-          {this.state.channels.map((channel) => (
-            <Chat channelLogin={channel} key={channel} />
-          ))}
+          {this.state.channels.length === 0 ?
+            (
+              <Center>
+                No channels added yet!
+              </Center>
+            )
+            : this.state.channels.map((channel) => (
+                <Chat channelLogin={channel} key={channel} />
+              ))
+          }
         </Chats>
       </FullHeightDiv>
     );
