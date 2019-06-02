@@ -7,24 +7,32 @@ const Center = styled('div', {
   fontFamily: 'HelveticaNeue-Light, Arial',
   display: 'flex',
   alignItems: 'center',
+  alignContent: 'center',
   justifyContent: 'center',
-  height: '100%',
 });
 
 const FullHeightDiv = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
   height: '100%',
-  backgroundColor: '#FFFFFF',
 });
 
 const Header = styled('div', {
   color: 'white',
-  height: '50px',
   backgroundColor: '#336699',
+  padding: '10px',
 });
 
 const Nav = styled('div', {
-  height: '50px',
   backgroundColor: '#6699CC',
+  padding: '10px',
+});
+
+const Chats = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
+  flexGrow: '1',
+  overflow: 'auto',
 });
 
 type State = {
@@ -34,7 +42,7 @@ type State = {
 
 class Home extends React.Component<{}, State> {
   state = {
-    channels: [],
+    channels: ['doobix'],
     channelInput: '',
   };
 
@@ -57,15 +65,20 @@ class Home extends React.Component<{}, State> {
         </Header>
         <Nav>
           <Center>
-            <input onChange={this.onChangeChannelInput} placeholder="Twitch channel name" value={this.state.channelInput} />
+            <input
+              onChange={this.onChangeChannelInput}
+              onKeyDown={this.onKeyDown}
+              placeholder="Twitch channel name"
+              value={this.state.channelInput}
+            />
             <button onClick={this.addChannel}>Add!</button>
           </Center>
         </Nav>
-        <Center>
+        <Chats>
           {this.state.channels.map((channel) => (
             <Chat channelLogin={channel} key={channel} />
           ))}
-        </Center>
+        </Chats>
       </FullHeightDiv>
     );
   }
@@ -74,6 +87,12 @@ class Home extends React.Component<{}, State> {
     this.setState({
       channelInput: event.target.value,
     });
+  }
+
+  onKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      this.addChannel();
+    }
   }
 
   addChannel = () => {
